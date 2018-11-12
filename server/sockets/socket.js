@@ -30,9 +30,11 @@ io.on('connection', (client) => {
         callback(atenderTicket);
 
         // Emitir evento para actualizar pantalla de status de tickets
-        client.broadcast.emit('actualizarEstado', {
-            ultimos4: ticketControl.getUltimos4()
-        });
+        if (atenderTicket !== 'No hay tickets pendientes') {
+            client.broadcast.emit('actualizarEstado', {
+                ultimos4: ticketControl.getUltimos4()
+            });
+        }
     });
 
 });
